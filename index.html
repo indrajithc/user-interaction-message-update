@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Change on User Interaction</title>
+    <style>
+      .message {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: lightgreen;
+        color: black;
+        padding: 10px;
+        font-size: 16px;
+        white-space: nowrap;
+      }
+    </style>
+
+    <script>
+      window._scriptsToLoad = [
+        { src: '/script.js' }, // No attributes
+      ];
+    </script>
+
+  <script> ((e,t,o)=>{let d=new CustomEvent("ui",{detail:e}),n=["keydown","mouseover","touchmove","touchstart","wheel"],a=0,r=()=>{t.UI_AC=!0,o.dispatchEvent(d),n.forEach(e=>t.removeEventListener(e,r,!1)),a&&clearTimeout(a),o.body.classList?.remove("body-loading")};t.addEventListener("DOMContentLoaded",()=>{n.forEach(e=>t.addEventListener(e,r,!1))}),a=setTimeout(()=>{r()},12e3)})({},window,document); </script>
+
+  </head>
+  <body class="body-loading">
+    <!-- Display the message -->
+    <div id="userMessage" class="message">Waiting for user interaction...</div>
+
+    <script>window._scriptsToLoad&&document.addEventListener("ui",()=>{window._scriptsToLoad.forEach(({src:t,attrs:r={}})=>{if(!t)return;let e=document.createElement("script");e.src=t,Object.keys(r).forEach(t=>{e.setAttribute(t,r[t])}),document.body.appendChild(e)}),window._scriptsToLoad=[]}); </script> 
+
+    <!-- Scripts for user interaction detection and dynamic script loading -->
+    <script>
+      // Load scripts after user interaction
+      document.addEventListener('ui', () => {
+        const message = document.getElementById('userMessage');
+        if (message) {
+          message.textContent =
+            'User interacted! Loading additional scripts...';
+        }
+      });
+    </script>
+  </body>
+</html>
